@@ -124,6 +124,32 @@ static void regexStringSplitFunc(sqlite3_context* context,
   callStringSplitFunc(context, argc, argv, regexSplit);
 }
 
+static void kasperskyVerFormatFunc(sqlite3_context* context,
+    int argc,
+    sqlite3_value** argv)
+{
+    //callStringSplitFunc(context, argc, argv, tokenSplit);
+    if (SQLITE_NULL == sqlite3_value_type(argv[0])) {
+        sqlite3_result_null(context);
+        return;
+    }
+    // Parse and verify the split input parameters.
+    std::string strInput((char*)sqlite3_value_text(argv[0]));
+
+    std::string strOutput;
+    if (strInput.length() < 8)
+    {
+        sqlite3_result_null(context);
+        return;
+    }
+    strInput = strInput.substr(0, 8);
+    strOutput = strInput.substr(4, 4) + std::string(".") + strInput.substr(2, 2) + std::string(".") + strInput.substr(0, 2);
+    sqlite3_result_text(context,
+        strOutput.c_str(),
+        static_cast<int>(strOutput.size()),
+        SQLITE_TRANSIENT);
+    return;
+}
 /**
  * @brief Convert an IPv4 string address to decimal.
  */
@@ -175,6 +201,14 @@ void registerStringExtensions(sqlite3* db) {
                           SQLITE_UTF8 | SQLITE_DETERMINISTIC,
                           nullptr,
                           ip4StringToDecimalFunc,
+                          nullptr,
+                          nullptr);
+  sqlite3_create_function(db,
+                          "kaspersky_ver_format",
+                          1,
+                          SQLITE_UTF8 | SQLITE_DETERMINISTIC,
+                          nullptr,
+                          kasperskyVerFormatFunc,
                           nullptr,
                           nullptr);
 }

@@ -71,6 +71,7 @@ function Invoke-OsqueryMsbuild {
 
   # If the build failed, or we're skipping tests return
   $skipTests = [environment]::GetEnvironmentVariable("SKIP_TESTS")
+  return $ret
   if (($ret.exitcode -ne 0) -or ($skipTests -ne $null)) {
     return $ret
   }

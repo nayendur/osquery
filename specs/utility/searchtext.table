@@ -1,0 +1,8 @@
+table_name("searchtext")
+description("find text file search.")
+schema([
+    Column("test", TEXT, "Current weekday in the system"),
+    Column("data", TEXT, "data found in file"),
+])
+attributes(utility=True)
+implementation("searchtext@gensearchtext")

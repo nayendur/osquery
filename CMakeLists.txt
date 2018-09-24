@@ -602,6 +602,7 @@ if(POSIX AND DEPS)
 endif()
 
 include_directories("${CMAKE_SOURCE_DIR}/third-party/sqlite3")
+include_directories("${CMAKE_SOURCE_DIR}/third-party/tinyxml")
 include_directories("${CMAKE_SOURCE_DIR}/include")
 include_directories("${CMAKE_SOURCE_DIR}")
 
@@ -703,6 +704,7 @@ if(NOT SKIP_TESTS)
 endif()
 
 add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/sqlite3")
+add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/tinyxml")
 
 if(NOT FREEBSD)
   add_subdirectory("${CMAKE_SOURCE_DIR}/third-party/linenoise-ng")

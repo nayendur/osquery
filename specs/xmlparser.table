@@ -1,0 +1,9 @@
+table_name("xmlparser")
+description("Read tag or attribute value in xml file.")
+schema([
+    Column("file", TEXT, "file name with absolute path", index=True, required=True),
+    Column("xmltag", TEXT, "tag value to be found", required=True),
+    Column("value", TEXT, "value after the pattren found"),
+])
+
+implementation("hash@genxmlparser")

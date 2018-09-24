@@ -1,0 +1,10 @@
+table_name("searchpattren")
+description("Read search pattren in a file.")
+schema([
+    Column("path", TEXT, "Must provide a path or directory", index=True, required=True),
+    Column("findstring", TEXT, "string to be found", required=True),
+	Column("noofchars", INTEGER, "No of characters to read, if not populated it reads whole line after search"),
+    Column("value", TEXT, "value after the pattren found"),
+])
+
+implementation("hash@gensearchpattren")

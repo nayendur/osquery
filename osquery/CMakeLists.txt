@@ -77,6 +77,7 @@ else()
   set(OSQUERY_OBJECTS
     $<TARGET_OBJECTS:osquery_sqlite>
     $<TARGET_OBJECTS:linenoise-ng>
+	$<TARGET_OBJECTS:tinyxml>
   )
 endif()
 
